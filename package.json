@@ -1,5 +1,4 @@
-{
-  "name": "nestar-api",
+{"name": "nestar-api",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -11,7 +10,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:dev:batch": "nest start nestar-batch --watch",
-    "train": " nest start train --watch",
+    "train": "nodemon --exec ts-node apps/train.ts",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/apps/nestar-api/main",
     "start:prod:batch": "node dist/apps/nestar-batch/main",
