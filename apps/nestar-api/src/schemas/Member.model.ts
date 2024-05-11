@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 import { MemberAuthType, MemberStatus, MemberType } from "../libs/enums/member.enum";
-import { timeStamp } from "console";
+
 
 const MemberSchema = new Schema({
      memberType:{
@@ -17,7 +17,7 @@ const MemberSchema = new Schema({
 
      },
 
-     memberAuthTypr:{
+     memberAuthType:{
         type:String,
         enum:MemberAuthType,
         default: MemberAuthType.PHONE,
@@ -113,11 +113,12 @@ const MemberSchema = new Schema({
         default: 0,
     },
    
-deleteAt:{
+deletedAt:{
     type: Date,
 }
 },
-{timeStamps:true, collection: "members"}
+ 
+  {timestamps:true, collection: "members"}
 );
 
 
