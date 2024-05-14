@@ -1,6 +1,29 @@
 console.log("Hello World");
 
 /* 
+ZL-TASK:
+
+Shunday function yozing, u parametrda berilgan stringni kebab casega otkazib qaytarsin. Bosh harflarni kichik harflarga ham otkazsin.
+MASALAN: stringToKebab(“I love Kebab”) return “i-love-kebab”
+*/
+
+function stringToKebab(input: string): string {
+    let result = '';
+    for (let i = 0; i < input.length; i++) {
+      const char = input[i].toLowerCase();
+      if (char >= 'a' && char <= 'z') {
+        result += char;
+      } else if (char === ' ') {
+        result += '-';
+      }
+    }
+    return result;
+  }
+  
+  
+  console.log(stringToKebab("I love Kebab")); 
+
+/* 
 ZK-TASK:
 
 Shunday function yozing, 
@@ -8,7 +31,7 @@ u har soniyada bir marta consolega 1 dan 5 gacha bolgan raqamlarni chop etsin
  va 5 soniyadan keyin ishini toxtatsin.
 MASALAN: printNumbers()
 */
-
+/* 
 function printNumber() {
     let currentNumber = 1;
     const intervalId = setInterval(() => {
@@ -21,7 +44,7 @@ function printNumber() {
   }
   
   
-  setTimeout(printNumber, 5000);
+  setTimeout(printNumber, 5000); */
 
  
 
