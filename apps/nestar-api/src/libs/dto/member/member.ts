@@ -35,7 +35,7 @@ export class Member{
     memberImage: string;
 
     @Field(() => String, {nullable: true})
-    memberAdress?: string;
+    memberAddress?: string;
 
     @Field(() => String, {nullable: true})
     memberDesc?: string;
@@ -44,7 +44,7 @@ export class Member{
     memberProperties: number;
 
     @Field(() => Int)
-    memberArticle: number;
+    memberArticles: number;
 
     @Field(() => Int)
     memberFollowers: number;

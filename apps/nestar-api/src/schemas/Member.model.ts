@@ -51,7 +51,7 @@ const MemberSchema = new Schema({
         default: '',
     },
 
-    memberAdress:{
+    memberAddress:{
         type: String,
     },
 
@@ -64,7 +64,7 @@ const MemberSchema = new Schema({
         default: 0,
     },
 
-    memberArticle:{
+    memberArticles:{
         type: Number,
         default: 0,
     },
