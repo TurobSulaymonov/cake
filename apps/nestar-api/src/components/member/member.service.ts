@@ -42,7 +42,7 @@ if(!response || response.memberStatus === MemberStatus.DELETE) {
 }
 
 // TODO: Compare password
-console.log("responce", response);
+
 
 const isMatch = memberPassword === response.memberPassword;
 if(!isMatch)  throw new InternalServerErrorException(Message.WRONG_PASSWORD);
