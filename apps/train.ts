@@ -1,12 +1,34 @@
 console.log("Hello World");
 
 /* 
-ZL-TASK:
+ZM-TASK:
+
+Shunday function yozing, u function parametrga berilgan
+ raqamlarni orqasiga ogirib qaytarsin.
+MASALAN: reverseInteger(123456789) return 987654321
+*/
+ 
+
+
+function reverseInteger (input: number): number {
+  const stringified = input.toString();
+  const reversed = parseInt(stringified.split('').reverse().join(''));
+  return Math.sign(input) * reversed;
+
+ }
+
+
+ const result = reverseInteger(123456789);
+ console.log( "result:", result);
+
+
+
+/*ZL-TASK:
 
 Shunday function yozing, u parametrda berilgan stringni kebab casega otkazib qaytarsin. Bosh harflarni kichik harflarga ham otkazsin.
 MASALAN: stringToKebab(“I love Kebab”) return “i-love-kebab”
 */
-
+/* 
 function stringToKebab(input: string): string {
     let result = '';
     for (let i = 0; i < input.length; i++) {
@@ -22,7 +44,7 @@ function stringToKebab(input: string): string {
   
   
   console.log(stringToKebab("I love Kebab")); 
-
+ */
 /* 
 ZK-TASK:
 
