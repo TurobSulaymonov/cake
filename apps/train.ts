@@ -1,6 +1,29 @@
 console.log("Hello World");
 
 /* 
+ZN-TASK:
+
+Shunday function yozing, uni array va number parametri bolsin. Ikkinchi parametrda berilgan raqamli indexgacha arrayni orqasiga ogirib qaytarsin.
+MASALAN: rotateArray([1, 2, 3, 4, 5, 6], 3) return [5, 6, 1, 2, 3, 4]
+*/
+function rotateArray(arr: number[], index: number): number[] {
+
+  if (index <= 0 || index >= arr.length) {
+      return arr;
+  }
+
+  let part1 = arr.slice(index);
+  let part2 = arr.slice(0, index);
+
+  return part1.concat(part2);
+}
+
+
+const result = rotateArray([1, 2, 3, 4, 5, 6], 3);
+console.log(result);  
+
+/* 
+
 ZM-TASK:
 
 Shunday function yozing, u function parametrga berilgan
@@ -10,7 +33,7 @@ MASALAN: reverseInteger(123456789) return 987654321
  
 
 
-function reverseInteger (input: number): number {
+/* function reverseInteger (input: number): number {
   const stringified = input.toString();
   const reversed = parseInt(stringified.split('').reverse().join(''));
   return Math.sign(input) * reversed;
@@ -20,7 +43,7 @@ function reverseInteger (input: number): number {
 
  const result = reverseInteger(123456789);
  console.log( "result:", result);
-
+ */
 
 
 /*ZL-TASK:
