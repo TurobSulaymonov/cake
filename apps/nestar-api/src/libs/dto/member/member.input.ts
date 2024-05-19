@@ -40,5 +40,5 @@ export class LoginInput{
     @Field(() => String)
     memberPassword: string;
 
-  
+    deleteAt?: Date;
 }
