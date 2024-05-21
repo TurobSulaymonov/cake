@@ -1,7 +1,8 @@
-import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { Field, InputType, Int, ObjectType } from "@nestjs/graphql";
 import { MemberAuthType, MemberStatus, MemberType } from "../../enums/member.enum";
 import { ObjectId } from "mongoose";
 import { toUSVString } from "util";
+import { isNotEmpty } from "class-validator";
 
 
 
@@ -85,3 +86,19 @@ export class Member{
     @Field(() => String, {nullable: true})
     accessToken?: string;
 }
+
+@ObjectType()
+export class TotalCounter{
+    @Field(() => Int, {nullable: true})
+    total: number;
+}
+
+@ObjectType()
+ export class Members {
+    @Field(() => [Member])
+    list: Member[];
+
+    @Field(() => [TotalCounter], {nullable: true})
+    metaCounter: TotalCounter[];
+ } 
+
