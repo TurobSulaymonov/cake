@@ -89,7 +89,7 @@ const MemberSchema = new Schema({
         default: 0,
     },
 
-    memberViews:{
+   memberViews:{
         type: Number,
         default: 0,
     },
