@@ -11,9 +11,10 @@ export class ViewService {
   
     public async recordView(input: ViewInput): Promise<View | null> {
        const viewExist = await this.checkViewExistence(input);
-        console.log("viewExist:", viewExist);
+        console.log("viewExist==>:", viewExist);
        if(!viewExist){
           console.log("-New View Insert-")
+          return await this.viewModel.create(input)
        } else return null
   }
 
