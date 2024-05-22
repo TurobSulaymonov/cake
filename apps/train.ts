@@ -1,11 +1,40 @@
 console.log("Hello World");
+
+/* 
+ZP-TASK:
+
+Shunday function yozing, u parametridagi array ichida eng kop takrorlangan raqamni topib qaytarsin.
+MASALAN: majorityElement([1,2,3,4,5,4,3,4]) return 4
+*/
+
+function majorityElement(nums: number[]): number {
+  const counts = new Map<number, number>();
+  let maxElement = nums[0];
+  let maxCount = 1;
+
+  for (const num of nums) {
+      const count = (counts.get(num) || 0) + 1;
+      counts.set(num, count);
+
+      if (count > maxCount) {
+          maxCount = count;
+          maxElement = num;
+      }
+  }
+
+  return maxElement;
+}
+
+
+console.log(majorityElement([1,2,3,4,5,4,3,4]));  
+
 /* 
 ZO-TASK:
 
 Shunday function yozing, u parametrdagi string ichidagi qavslar miqdori balansda ekanligini aniqlasin. Ya'ni ochish("(") va yopish(")") qavslar soni bir xil bolishi kerak.
 MASALAN: areParenthesesBalanced("string()ichida(qavslar)soni()balansda") return true
 */
-function areParenthesesBalanced(s: string): boolean {
+/* function areParenthesesBalanced(s: string): boolean {
   let balance: number = 0;
 
   for (let char of s) {
@@ -25,7 +54,7 @@ function areParenthesesBalanced(s: string): boolean {
 }
 
 
-console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda"));  
+console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda"));  */ 
 
 
 /* 
