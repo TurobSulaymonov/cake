@@ -4,6 +4,7 @@ import { ObjectId } from "mongoose";
 import { toUSVString } from "util";
 import { isNotEmpty } from "class-validator";
 import { PropertyLocation, PropertyStatus, PropertyType } from "../../enums/property.enum";
+import { Member } from "../member/member";
 
 
 
@@ -82,6 +83,11 @@ export class Property{
 
     @Field(() => Date)
     updatedAt: Date;
+
+    /** from aggregation **/
+    
+    @Field(() => Member, {nullable: true})
+    memberData: Member
 
 
 }
