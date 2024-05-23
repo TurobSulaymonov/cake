@@ -1,10 +1,10 @@
-import { Field, InputType, Int, ObjectType } from "@nestjs/graphql";
+import { Field, InputType, Int,  ObjectType } from "@nestjs/graphql";
 import { MemberAuthType, MemberStatus, MemberType } from "../../enums/member.enum";
 import { ObjectId } from "mongoose";
 import { toUSVString } from "util";
 import { isNotEmpty } from "class-validator";
 import { PropertyLocation, PropertyStatus, PropertyType } from "../../enums/property.enum";
-import { Member } from "../member/member";
+import { Member, TotalCounter } from "../member/member";
 
 
 
@@ -88,8 +88,17 @@ export class Property{
     
     @Field(() => Member, {nullable: true})
     memberData: Member
-
-
 }
+
+ @ObjectType()
+ export class Properties {
+    @Field(() => [Property])
+    list: Property[];
+    
+    @Field(() => [TotalCounter], {nullable: true})
+    metaCounter: TotalCounter[];
+   
+  
+ }
 
 

@@ -70,9 +70,4 @@ export class PropertyUpdate{
     @IsOptional()
     @Field(() => Date, {nullable: true})
     constructedAt?: Date;
-
-
-    
-
-
 }
