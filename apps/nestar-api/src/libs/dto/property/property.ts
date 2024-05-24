@@ -87,7 +87,7 @@ export class Property{
     /** from aggregation **/
     
     @Field(() => Member, {nullable: true})
-    memberData: Member
+    memberData?: Member
 }
 
  @ObjectType()
