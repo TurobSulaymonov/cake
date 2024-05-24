@@ -4,7 +4,12 @@ import { Roles } from '../auth/decorators/roles.decorator';
 import { MemberType } from '../../libs/enums/member.enum';
 import { UseGuards } from '@nestjs/common';
 import { RolesGuard } from '../auth/guards/roles.guard';
-import { AgentPropertiesInquiry, AllPropertiesInquiry, PropertiesInquiry, PropertyInput } from '../../libs/dto/property/property.input';
+import { 
+   AgentPropertiesInquiry,
+    AllPropertiesInquiry,
+     PropertiesInquiry,
+      PropertyInput 
+   } from '../../libs/dto/property/property.input';
 import { AuthMember } from '../auth/decorators/authMember.decorator';
 import { Properties, Property } from '../../libs/dto/property/property';
 import { ObjectId } from 'mongoose';

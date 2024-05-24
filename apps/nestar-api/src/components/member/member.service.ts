@@ -164,6 +164,7 @@ public async updateMemberByAdmin(input: MemberUpdate): Promise<Member>{
     return result;
 }
 
+
 public async memberStatsEditor (input: StatisticModifier): Promise<Member> {
   console.log("exuceted:!")
   const {_id, targetKey, modifier} = input;
@@ -172,5 +173,4 @@ public async memberStatsEditor (input: StatisticModifier): Promise<Member> {
     {new: true})
     .exec()
 }
-
 }
