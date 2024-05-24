@@ -1,5 +1,39 @@
 console.log("Hello World");
 
+
+/*  
+ZQ-TASK:
+
+Shunday function yozing, u parametridagi array ichida 2 marta qaytarilgan sonlarni alohida araryda qaytarsin.
+MASALAN: findDuplicates([1,2,3,4,5,4,3,4]) return [3, 4]
+*/
+
+function findDuplicates(arr: number[]): number[] {
+  const elementCount: Map<number, number> = new Map();
+  const duplicates: Set<number> = new Set();
+
+  
+  for (const num of arr) {
+      if (elementCount.has(num)) {
+          elementCount.set(num, elementCount.get(num)! + 1);
+      } else {
+          elementCount.set(num, 1);
+      }
+  }
+  elementCount.forEach((count, num) => {
+      if (count > 1) {
+          duplicates.add(num);
+      }
+  });
+
+
+  return Array.from(duplicates);
+}
+
+
+console.log(findDuplicates([1,2,3,4,5,4,3]));  
+
+
 /* 
 ZP-TASK:
 
@@ -7,7 +41,7 @@ Shunday function yozing, u parametridagi array ichida eng kop takrorlangan raqam
 MASALAN: majorityElement([1,2,3,4,5,4,3,4]) return 4
 */
 
-function majorityElement(nums: number[]): number {
+/* function majorityElement(nums: number[]): number {
   const counts = new Map<number, number>();
   let maxElement = nums[0];
   let maxCount = 1;
@@ -26,7 +60,7 @@ function majorityElement(nums: number[]): number {
 }
 
 
-console.log(majorityElement([1,2,3,4,5,4,3,4]));  
+console.log(majorityElement([1,2,3,4,5,4,3,4]));  */ 
 
 /* 
 ZO-TASK:
