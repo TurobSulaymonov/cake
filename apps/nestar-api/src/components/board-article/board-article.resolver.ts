@@ -26,7 +26,7 @@ export class BoardArticleResolver {
         ): Promise<BoardArticle> {
         console.log("Mutation: createboardArticle");
         input.memberId = memberId;
-        return await this.boardArticleService.createboardArticle(memberId, input);
+        return await this.boardArticleService.createBoardArticle(memberId, input);
       } 
      
       @UseGuards(WithoutGuard)

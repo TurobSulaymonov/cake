@@ -19,7 +19,7 @@ export class BoardArticleService {
     private readonly viewService: ViewService,
 ) {}
 
-    public async createboardArticle (memberId: ObjectId, input: BoardArticleInput,): Promise<BoardArticle>{
+    public async createBoardArticle (memberId: ObjectId, input: BoardArticleInput,): Promise<BoardArticle>{
         input.memberId = memberId
         try{
             const result = await this.boardArticleModel.create(input)
