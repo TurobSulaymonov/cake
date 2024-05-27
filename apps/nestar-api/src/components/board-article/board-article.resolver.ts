@@ -20,11 +20,11 @@ export class BoardArticleResolver {
     
     @UseGuards(AuthGuard)
     @Mutation((returns) => BoardArticle)
-    public async createboardArticle (
+    public async createBoardArticle (
         @Args("input") input: BoardArticleInput,
         @AuthMember("_id") memberId: ObjectId,
         ): Promise<BoardArticle> {
-        console.log("Mutation: createboardArticle");
+        console.log("Mutation: createBoardArticle");
         input.memberId = memberId;
         return await this.boardArticleService.createBoardArticle(memberId, input);
       } 
@@ -65,12 +65,12 @@ export class BoardArticleResolver {
     @Roles(MemberType.ADMIN)
     @UseGuards(RolesGuard)
     @Query((returns) => BoardArticles)
-    public async getAllBoardArticleByAdmin(
+    public async getAllBoardArticlesByAdmin(
      @Args('input') input: AllBoardArticlesInquiry,
      @AuthMember('_id') memberId: ObjectId,
     ): Promise<BoardArticles> {
-     console.log("Query: getAllBoardArticleByAdmin!");
-     return await this.boardArticleService.getAllBoardArticleByAdmin(input)
+     console.log("Query: getAllBoardArticlesByAdmin!");
+     return await this.boardArticleService.getAllBoardArticlesByAdmin(input)
    }
    
    @Roles(MemberType.ADMIN)

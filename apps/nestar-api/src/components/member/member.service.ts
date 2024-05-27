@@ -131,6 +131,10 @@ public async getAgents (memberId: ObjectId, input: AgentsInquiry): Promise<Membe
   return result[0];
 }
 
+/* public async likeTargetMember(memberId: ObjectId, likeRefId: ObjectId): Promise<Member>{
+
+} */
+
 public async getAllMembersByAdmin(input: MembersInquiry): Promise<Members> {
    
   const {memberStatus, memberType ,text} = input.search;
