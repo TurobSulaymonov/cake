@@ -127,8 +127,8 @@ export class BoardArticleService {
     const { articleStatus, articleCategory } = input.search;
     const match: T = {};
     const sort: T = { [input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC};
-       
-    if (articleStatus) match.articleStatus = articleStatus;
+       console.log("match:", match)
+    if (articleStatus ) match.articleStatus = articleStatus ;
 	if (articleCategory) match.articleCategory = articleCategory;
     
     const result = await this.boardArticleModel
