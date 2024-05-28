@@ -3,6 +3,7 @@ import { ObjectId } from "mongoose";
 import { isNotEmpty } from "class-validator";
 import { PropertyLocation, PropertyStatus, PropertyType } from "../../enums/property.enum";
 import { Member, TotalCounter } from "../member/member";
+import { MeLiked } from "../like/like";
 
 
 
@@ -86,6 +87,10 @@ export class Property{
     
     @Field(() => Member, {nullable: true})
     memberData?: Member
+
+   
+    @Field(() => [MeLiked], {nullable: true})
+    meLiked?: MeLiked[];
 }
 
  @ObjectType()
