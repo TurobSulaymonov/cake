@@ -84,7 +84,7 @@ export class MemberResolver {
     }
     
     /** LIKE **/
-/*     @UseGuards(AuthGuard)
+     @UseGuards(AuthGuard)
     @Mutation(() => Member)
     public async likeTargetMember(
         @Args("memberId") input: string,
@@ -93,7 +93,7 @@ export class MemberResolver {
         console.log("Mutation: LikeTargetMember");
         const likeRefId = shapeIntoMongoObjectId(input);
         return await this.memberService.likeTargetMember(memberId, likeRefId )
-    } */
+    } 
 
     /** ADMIN **/
     @Roles(MemberType.ADMIN)

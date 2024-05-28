@@ -10,11 +10,10 @@ import { LikeService } from './like.service';
          {
            name: "Like", 
            schema: LikeSchema,
-         }
+         },
   ]),
-  AuthModule,
-    ],
-providers: [LikeService],
-exports:[LikeService],
+],
+providers:[LikeService],
+exports: [LikeService],
 })
 export class LikeModule {}

@@ -61,7 +61,9 @@ export class BoardArticleService {
     }
      
     
-    public async updateBoardArticle(memberId: ObjectId, input: BoardArticleUpdate): Promise<BoardArticle> {
+    public async updateBoardArticle(memberId: ObjectId, input: BoardArticleUpdate
+        
+    ): Promise<BoardArticle> {
         let {_id, articleStatus,  } = input;
       
        const result = await this.boardArticleModel
