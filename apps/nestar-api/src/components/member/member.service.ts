@@ -136,6 +136,7 @@ public async getAgents (memberId: ObjectId, input: AgentsInquiry): Promise<Membe
   if(!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
   return result[0];
 }
+
 /**  LIKE **/  
 public async likeTargetMember(memberId: ObjectId, likeRefId: ObjectId): Promise<Member>{
 const target: Member = await this.memberModel.findOne({_id: likeRefId, memberStatus: MemberStatus.ACTIVE}).exec();
@@ -147,7 +148,7 @@ likeRefId: likeRefId,
 likeGroup: LikeGroup.MEMBER,
 };
 
-//LIKE TOGGLE
+
 const modifier: number = await this.likeService.toggleLike(input);
 const result = await this.memberStatsEditor({
   _id: likeRefId,

@@ -60,6 +60,8 @@ export class BoardArticleResolver {
        console.log("Query: getBoardArticles!");
        return await this.boardArticleService.getBoardArticles(memberId, input)
     }
+ 
+
     /** ADMIN **/
 
     @Roles(MemberType.ADMIN)
