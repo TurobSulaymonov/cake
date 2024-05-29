@@ -1,12 +1,28 @@
 console.log("Hello World");
+/* 
+ZS-TASK:
 
+Shunday function yozing, u parametridagi arrayni ichidagi 1 marta kelgan elemnetni qaytarsin.
+MASALAN: singleNumber([4, 2, 1, 2, 1]) return 4
+*/
+function singleNumber(nums: number []): number {
+  let result: number = 0;
+  for (let num of nums) {
+      result ^= num;
+  }
+  return result;
+}
+
+
+const nums = [4, 2, 1, 2, 1];
+console.log(singleNumber(nums)); 
 /* 
 ZR-TASK:
 
 Shunday function yozing, u parametridagi string ichidagi raqam va sonlarni sonini sanasin.
 MASALAN: countNumberAndLetters(“string152%\¥”) return {number:3, letter:6}
 */
-
+/* 
 function countNumberAndLetters(input: string): { number: number; letter: number } {
   let numberCount = 0;
   let letterCount = 0;
@@ -31,7 +47,7 @@ Shunday function yozing, u parametridagi array ichida 2 marta qaytarilgan sonlar
 MASALAN: findDuplicates([1,2,3,4,5,4,3,4]) return [3, 4]
 */
 
-function findDuplicates(arr: number[]): number[] {
+/*function findDuplicates(arr: number[]): number[] {
   const elementCount: Map<number, number> = new Map();
   const duplicates: Set<number> = new Set();
 
@@ -54,7 +70,7 @@ function findDuplicates(arr: number[]): number[] {
 }
 
 
-console.log(findDuplicates([1,2,3,4,5,4,3]));  
+console.log(findDuplicates([1,2,3,4,5,4,3]));   */
 
 
 /* 
