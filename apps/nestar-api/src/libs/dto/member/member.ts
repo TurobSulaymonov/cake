@@ -4,6 +4,7 @@ import { ObjectId } from "mongoose";
 import { toUSVString } from "util";
 import { isNotEmpty } from "class-validator";
 import { MeLiked } from "../like/like";
+import { MeFollowed } from "../follow/follow";
 
 
 
@@ -90,6 +91,9 @@ export class Member{
     /** from aggregation **/
     @Field(() => [MeLiked], {nullable: true})
     meLiked?: MeLiked[];
+
+    @Field(() => [MeFollowed], {nullable: true})
+    meFollowed?: MeFollowed[];
 }
 
 @ObjectType()
