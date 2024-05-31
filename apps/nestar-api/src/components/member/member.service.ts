@@ -114,8 +114,8 @@ public async getMember(memberId: ObjectId, targetId: ObjectId): Promise<Member> 
 
 
     //meFollowed
-targetMember.meFollowed = await this.checkSubscription(memberId, targetId) 
-
+targetMember.meFollowed = await this.checkSubscription(memberId, targetId);
+console.log("meFollowed", targetMember.meFollowed)
     
   } 
 
