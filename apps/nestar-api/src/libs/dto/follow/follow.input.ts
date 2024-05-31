@@ -10,7 +10,7 @@ class FollowSearch {
 
 	@IsOptional()
 	@Field(() => String, { nullable: true })
-	followerId?: ObjectId;
+	followingId?: ObjectId;
 }
 
 @InputType()

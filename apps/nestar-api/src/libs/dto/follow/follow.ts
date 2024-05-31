@@ -40,8 +40,8 @@ export class Follower {
 	@Field(() => [MeFollowed], { nullable: true })
 	meFollowed?: MeFollowed[];
 
-	@Field(() => Member, { nullable: true })
-	followerData?: Member;
+	 @Field(() => Member, { nullable: true })
+	followerData?: Member; 
 }
 
 @ObjectType()
@@ -69,8 +69,8 @@ export class Following {
 	@Field(() => [MeFollowed], { nullable: true })
 	meFollowed?: MeFollowed[];
 
-	@Field(() => Member, { nullable: true })
-	followingData?: Member;
+	 @Field(() => Member, { nullable: true })
+	followingData?: Member; 
 }
 
 @ObjectType()
