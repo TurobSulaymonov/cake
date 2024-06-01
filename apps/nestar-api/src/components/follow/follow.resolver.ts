@@ -21,7 +21,7 @@ export class FollowResolver {
     ): Promise<Follower> {
         console.log("Mutation: subscribe");
         const followingId = shapeIntoMongoObjectId(input);
-        return await this.followService.subscribe(memberId, followingId);
+         return await this.followService.subscribe(memberId, followingId);
     }
 
     @UseGuards(AuthGuard)

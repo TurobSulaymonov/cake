@@ -14,18 +14,18 @@ export class FollowService {
     private memberService: MemberService,
 ){}
 
-public async subscribe(followerId: ObjectId, followingId: ObjectId): Promise<Follower>{
-     if(followerId.toString() === followingId.toString()){
+public async subscribe(followerid: ObjectId, followingId: ObjectId): Promise<Follower>{
+     if(followerid.toString() === followingId.toString()){
         throw new InternalServerErrorException(Message.SELF_SUBSCRIPTION_DENIED);
-     }
+     } 
 
      const targetMember = await this.memberService.getMember(null, followingId);
     if (!targetMember) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
      
-     const result = await this.registerSubscription(followerId, followingId);
+     const result = await this.registerSubscription(followerid, followingId);
 
-     await this.memberService.memberStatsEditor({_id: followerId, targetKey: "memberFollowers", modifier: 1});
-     await this.memberService.memberStatsEditor({_id: followerId, targetKey: "memberFollowers", modifier: 1});
+     await this.memberService.memberStatsEditor({_id: followerid, targetKey: "memberFollowings", modifier: 1});
+     await this.memberService.memberStatsEditor({_id: followingId, targetKey: "memberFollowers", modifier: 1});
 
     return result;
 
@@ -63,8 +63,8 @@ public async unsubscribe(followerId: ObjectId, followingId: ObjectId): Promise<F
 
 public async getMemberFollowings (memberId: ObjectId, input: FollowInquiry): Promise<Followings> {
  const { page, limit, search } = input;
- if(!search?.followingId) throw new InternalServerErrorException(Message.BAD_REQUEST);
- const match: T = {followerId: search?.followingId};
+ if(!search?.followerId) throw new InternalServerErrorException(Message.BAD_REQUEST);
+ const match: T = {followerId: search?.followerId};
  console.log("match: ", )
 
     const result = await this.followModel

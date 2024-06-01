@@ -25,7 +25,7 @@ export class Follower {
 
 	@Field(() => String)
 	followerId: ObjectId;
-
+ 
 	@Field(() => Date)
 	createdAt: Date;
 
