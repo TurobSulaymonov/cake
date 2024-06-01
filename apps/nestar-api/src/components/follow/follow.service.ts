@@ -65,30 +65,32 @@ public async getMemberFollowings (memberId: ObjectId, input: FollowInquiry): Pro
  const { page, limit, search } = input;
  if(!search?.followerId) throw new InternalServerErrorException(Message.BAD_REQUEST);
  const match: T = {followerId: search?.followerId};
- console.log("match: ", )
+ console.log("match: ", match )
 
     const result = await this.followModel
     .aggregate([
         {$match: match},
         {$sort: {createdAt: Direction.DESC}},
         {
-            $facet: {
+            $facet: {  
                 list: [
                  { $skip: (page - 1 )  * limit},
-                 {$limit: limit},
+                 { $limit: limit },
                  lookupAuthMemberLiked(memberId, "$followingId"),
                  lookupAuthMemberFollowed({
                      followerId: memberId,
                      followingId: "$followingId"
-                    }),
+                    }), 
                  lookupFollowingData,
-                 {$unwind: "$followingData"},
+                 {$unwind: '$followingData'},
                 ],
-                metaCounter: [{$count: "total"}],
+                 metaCounter: [{$count: 'total'}], 
             },
         },
     ])
     .exec();
+
+    console.log("result", result)
     if(!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
     return result[0]; 
 }
@@ -106,7 +108,7 @@ public async getMemberFollowers (memberId: ObjectId, input: FollowInquiry): Prom
            {$sort: {createdAt: Direction.DESC}},
            {
                $facet: {
-                   list: [
+                list: [
                     { $skip: (page - 1 )  * limit},
                     {$limit: limit},
                     lookupAuthMemberLiked(memberId, "$followerId"),
@@ -122,6 +124,7 @@ public async getMemberFollowers (memberId: ObjectId, input: FollowInquiry): Prom
            },
        ])
        .exec();
+       console.log("result", result)
        if(!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
        return result[0]; 
    }

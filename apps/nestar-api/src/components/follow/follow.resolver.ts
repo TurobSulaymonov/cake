@@ -42,8 +42,9 @@ export class FollowResolver {
        @AuthMember('_id') memberId: ObjectId,
     ): Promise <Followings>{
        console.log("Query: getMemberFollowings");
-       const { followingId: followerId } = input.search
-       input.search.followingId = shapeIntoMongoObjectId(followerId)
+       const { followerId } = input.search;
+       console.log("followId", followerId);
+       input.search.followerId = shapeIntoMongoObjectId(followerId)
        return await this.followService.getMemberFollowings(memberId, input)
     }   
 
@@ -52,9 +53,9 @@ export class FollowResolver {
     public async getMemberFollowers (
        @Args('input') input: FollowInquiry,
        @AuthMember('_id') memberId: ObjectId,
-    ): Promise <Followings>{
+    ): Promise <Followers>{
        console.log("Query: getMemberFollowers");
-       const { followingId: followingId } = input.search
+       const { followingId} = input.search
        input.search.followingId = shapeIntoMongoObjectId(followingId)
        return await this.followService.getMemberFollowers(memberId, input)
     }  
