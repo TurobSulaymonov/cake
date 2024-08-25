@@ -1,7 +1,7 @@
 import { Field, InputType, Int,  ObjectType } from "@nestjs/graphql";
 import { ObjectId } from "mongoose";
 import { isNotEmpty } from "class-validator";
-import { PropertyLocation, PropertyStatus, PropertyType } from "../../enums/property.enum";
+import { ProductStatus, PropertyLocation,  PropertyType } from "../../enums/property.enum";
 import { Member, TotalCounter } from "../member/member";
 import { MeLiked } from "../like/like";
 
@@ -16,20 +16,20 @@ export class Property{
     @Field(() => PropertyType)
     propertyType:PropertyType;
     
-    @Field(() => PropertyStatus)
-    propertyStatus?:PropertyStatus;
+    @Field(() => ProductStatus)
+    productStatus?:ProductStatus;
     
     @Field(() => PropertyLocation)
     propertyLocation:PropertyLocation;
 
     @Field(() => String)
-    propertyAddress: string;
+    productAddress: string;
 
     @Field(() => String)
-    propertyTitle: string;
+    productName: string;
 
     @Field(() => Number)
-    propertyPrice: number;
+    productPrice: number;
 
     @Field(() => Number)
     propertySquare: number;
@@ -41,22 +41,22 @@ export class Property{
     propertyRooms: number;
 
     @Field(() => Int)
-    propertyViews: number;
+    productViews: number;
 
     @Field(() => Int)
-    propertyLikes: number;
+    productLikes: number;
 
     @Field(() => Int)
-    propertyComments: number;
+    productComments: number;
 
     @Field(() => Int)
     propertyRank: number;
 
     @Field(() => [String])
-    propertyImages: string [];
+    productImages: string [];
 
     @Field(() => String, {nullable: true})
-    propertyDesc?: string;
+    productDesc?: string;
 
     @Field(() => Boolean)
     propertyBarter: boolean;

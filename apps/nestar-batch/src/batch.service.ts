@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Member } from 'apps/nestar-api/src/libs/dto/member/member';
 import { Property } from 'apps/nestar-api/src/libs/dto/property/property';
 import { MemberStatus, MemberType } from 'apps/nestar-api/src/libs/enums/member.enum';
-import { PropertyStatus } from 'apps/nestar-api/src/libs/enums/property.enum';
+import { productStatus } from 'apps/nestar-api/src/libs/enums/property.enum';
 import { Model } from 'mongoose';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class BatchService {
    
     await this.propertyModel
     .updateMany({
-      propertyStatus: PropertyStatus.ACTIVE,
+      productStatus: productStatus.ACTIVE,
     },
      { propertyRank: 0 },
   )
@@ -39,14 +39,14 @@ export class BatchService {
     console.log("batchProperties")
     const properties: Property[] = await this.propertyModel
     .find({
-      propertyStatus: PropertyStatus.ACTIVE,
+      productStatus: productStatus.ACTIVE,
       propertyRank: 0,
     })
     .exec();
 
     const promisedList = properties.map(async (ele: Property) => {
-      const { _id, propertyLikes, propertyViews} = ele;
-      const rank = propertyLikes * 2 + propertyViews * 1;
+      const { _id, productLikes, productViews} = ele;
+      const rank = productLikes * 2 + productViews * 1;
       return await this.propertyModel.findByIdAndUpdate(_id, { propertyRank: rank});
     })
     await Promise.all(promisedList);

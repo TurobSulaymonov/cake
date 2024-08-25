@@ -11,7 +11,7 @@ import {
 } from '../../libs/dto/property/property.input';
 import { Direction, Message } from '../../libs/enums/common.enum';
 import { MemberService } from '../member/member.service';
-import { PropertyStatus } from '../../libs/enums/property.enum';
+import { ProductStatus } from '../../libs/enums/property.enum';
 import { StatisticModifier, T } from '../../libs/types/common';
 import { ViewGroup } from '../../libs/enums/view.enum';
 import { ViewService } from '../view/view.service';
@@ -53,7 +53,7 @@ export class PropertyService {
     public async getProperty (memberId: ObjectId, propertyId: ObjectId): Promise<Property>{
         const search: T = {
             _id: propertyId,
-            propertyStatus: PropertyStatus.ACTIVE
+            productStatus: ProductStatus.ACTIVE
         };
         const targetProperty: Property = await this.propertyModel.findOne(search).lean().exec();
         if(!targetProperty) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
@@ -63,8 +63,8 @@ export class PropertyService {
             const newView = await this.viewService.recordView(viewInput);
             console.log("member:")
             if(newView){
-                await this.propertyStatsEditor({_id: propertyId, targetKey: 'propertyviews', modifier: 1});
-                targetProperty.propertyViews++;
+                await this.propertyStatsEditor({_id: propertyId, targetKey: 'productViews', modifier: 1});
+                targetProperty.productViews++;
             }
 
             //MeLiked
@@ -78,15 +78,15 @@ export class PropertyService {
 
 
     public async updateProperty(memberId: ObjectId, input: PropertyUpdate): Promise<Property> {
-        let {propertyStatus, soldAt, deletedAt } = input;
+        let {productStatus, soldAt, deletedAt } = input;
         const search: T = {
             _id: input._id,
             memberId: memberId,
-            propertyStatus: PropertyStatus.ACTIVE,
+            productStatus: ProductStatus.ACTIVE,
         };
 
-        if(propertyStatus === PropertyStatus.SOLD ) soldAt = moment().toDate();
-        else if (propertyStatus === PropertyStatus.DELETE) deletedAt = moment().toDate();
+        if(productStatus === ProductStatus.SOLD ) soldAt = moment().toDate();
+        else if (productStatus === ProductStatus.DELETE) deletedAt = moment().toDate();
 
         const result = await this.propertyModel
         .findOneAndUpdate(search, input, {
@@ -108,7 +108,7 @@ export class PropertyService {
     }
 
     public async getProperties (memberId: ObjectId, input: PropertiesInquiry): Promise<Properties> {
-        const match: T = { propertyStatus: PropertyStatus.ACTIVE};
+        const match: T = { productStatus: ProductStatus.ACTIVE};
         const sort: T = {[input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC };
 
         this.shapeMatchQuery(match, input);
@@ -155,12 +155,12 @@ export class PropertyService {
 		if (bedsList && bedsList.length) match.propertyBeds = { $in: bedsList };
 		if (typeList && typeList.length) match.propertyType = { $in: typeList };
 
-		if (pricesRange) match.propertyPrice = { $gte: pricesRange.start, $lte: pricesRange.end };
+		if (pricesRange) match.productPrice = { $gte: pricesRange.start, $lte: pricesRange.end };
 		if (periodsRange) match.createdAt = { $gte: periodsRange.start, $lte: periodsRange.end };
 		if (squaresRange) match.propertySquare = { $gte: squaresRange.start, $lte: squaresRange.end };
 
         
-        if(text) match.propertyTitle = {$regex: new RegExp(text, 'i') };
+        if(text) match.productName = {$regex: new RegExp(text, 'i') };
         if(options) {
           match['$or'] = options.map((ele) => {
             return{[ele]:  true };
@@ -176,12 +176,12 @@ export class PropertyService {
      }
 
     public async getAgentProperties(memberId: ObjectId, input: AgentPropertiesInquiry): Promise<Properties> {
-        const { propertyStatus } = input.search;
-        if(propertyStatus === PropertyStatus.DELETE) throw new BadRequestException(Message.NOT_ALLOWED_REQUEST);
+        const { productStatus } = input.search;
+        if(productStatus === ProductStatus.DELETE) throw new BadRequestException(Message.NOT_ALLOWED_REQUEST);
         
         const match: T = {
             memberId: memberId,
-            propertyStatus: propertyStatus ?? { $ne: PropertyStatus.DELETE },
+            productStatus: productStatus ?? { $ne: ProductStatus.DELETE },
          };
          const sort: T = {[input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC};
 
@@ -213,7 +213,7 @@ export class PropertyService {
 /**  LIKE **/  
 public async likeTargetProperty(memberId: ObjectId, likeRefId: ObjectId): Promise<Property>{
     const target: Property = await this.propertyModel
-    .findOne({_id: likeRefId, propertyStatus: PropertyStatus.ACTIVE})
+    .findOne({_id: likeRefId, productStatus: ProductStatus.ACTIVE})
     .exec();
     console.log("heolloWord", target);
     if(!target) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
@@ -227,7 +227,7 @@ public async likeTargetProperty(memberId: ObjectId, likeRefId: ObjectId): Promis
     const modifier: number = await this.likeService.toggleLike(input);
     const result = await this.propertyStatsEditor({
       _id: likeRefId,
-       targetKey: "propertyLikes", 
+       targetKey: "productLikes", 
        modifier: modifier
       });
       if(!result) throw new InternalServerErrorException(Message.SOMETHING_WENT_WRONG);
@@ -236,10 +236,10 @@ public async likeTargetProperty(memberId: ObjectId, likeRefId: ObjectId): Promis
     
 
    public async getAllPropertiesByAdmin(input: AllPropertiesInquiry): Promise<Properties> {
-    const { propertyStatus, propertyLocationList } = input.search;
+    const { productStatus, propertyLocationList } = input.search;
     const match: T = {};
     const sort: T = { [input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC};
-        if (propertyStatus) match.propertyStatus = propertyStatus;
+        if (productStatus) match.productStatus = productStatus;
 		if (propertyLocationList) match.propertyLocation = { $in: propertyLocationList };
      const result = await this.propertyModel
      .aggregate([
@@ -266,14 +266,14 @@ public async likeTargetProperty(memberId: ObjectId, likeRefId: ObjectId): Promis
    }
 
    public async updatePropertyByAdmin(input: PropertyUpdate): Promise<Property> {
-    let {propertyStatus, soldAt, deletedAt } = input;
+    let {productStatus, soldAt, deletedAt } = input;
     const search: T = {
         _id: input._id,
-         propertyStatus: PropertyStatus.ACTIVE,
+         productStatus: ProductStatus.ACTIVE,
     };
 
-    if(propertyStatus === PropertyStatus.SOLD ) soldAt = moment().toDate();
-    else if (propertyStatus === PropertyStatus.DELETE) deletedAt = moment().toDate();
+    if(productStatus === ProductStatus.SOLD ) soldAt = moment().toDate();
+    else if (productStatus === ProductStatus.DELETE) deletedAt = moment().toDate();
 
     const result = await this.propertyModel
     .findOneAndUpdate(search, input, {
@@ -296,7 +296,7 @@ public async likeTargetProperty(memberId: ObjectId, likeRefId: ObjectId): Promis
 
     public async removePropertyByAdmin(propertyId: ObjectId): Promise<Property> {
 
-     const search: T = {_id: propertyId, propertyStatus: PropertyStatus.DELETE};
+     const search: T = {_id: propertyId, productStatus: ProductStatus.DELETE};
      const result = await this.propertyModel.findOneAndDelete(search).exec()
      if(!result) throw new InternalServerErrorException(Message.REMOVE_FAILED);
 

@@ -1,6 +1,6 @@
 import { Field, InputType, Int } from "@nestjs/graphql";
 import { IsIn, IsInt, IsNotEmpty, IsOptional, Length, Min, isNotEmpty } from "class-validator";
-import { PropertyLocation, PropertyStatus, PropertyType } from "../../enums/property.enum";
+import { PropertyLocation, ProductStatus, PropertyType } from "../../enums/property.enum";
 
 import { ObjectId } from "mongoose";
 import { availableOptions, availablePropertySorts } from "../../config";
@@ -20,16 +20,16 @@ export class PropertyInput {
 	@IsNotEmpty()
 	@Length(3, 100)
 	@Field(() => String)
-	propertyAddress: string;
+	productAddress: string;
 
 	@IsNotEmpty()
 	@Length(3, 100)
 	@Field(() => String)
-	propertyTitle: string;
+	productName: string;
 
 	@IsNotEmpty()
 	@Field(() => Number)
-	propertyPrice: number;
+	productPrice: number;
 
 	@IsNotEmpty()
 	@Field(() => Number)
@@ -49,12 +49,12 @@ export class PropertyInput {
 
 	@IsNotEmpty()
 	@Field(() => [String])
-	propertyImages: string[];
+	productImages: string[];
 
 	@IsOptional()
 	@Length(5, 500)
 	@Field(() => String, { nullable: true })
-	propertyDesc?: string;
+	productDesc?: string;
 
 	@IsOptional()
 	@Field(() => Boolean, { nullable: true })
@@ -171,8 +171,8 @@ export class PropertiesInquiry {
 @InputType()
 class APISearch {
 	@IsOptional()
-	@Field(() => PropertyStatus, { nullable: true })
-	propertyStatus?: PropertyStatus;
+	@Field(() => ProductStatus, { nullable: true })
+	productStatus?: ProductStatus;
 }
 
 @InputType()
@@ -204,8 +204,8 @@ export class AgentPropertiesInquiry {
 @InputType()
 class ALPISerach {
 	@IsOptional()
-	@Field(() => PropertyStatus, { nullable: true })
-	propertyStatus?: PropertyStatus;
+	@Field(() => ProductStatus, { nullable: true })
+	productStatus?: ProductStatus;
 
 	@IsOptional()
 	@Field(() => [PropertyLocation], { nullable: true })

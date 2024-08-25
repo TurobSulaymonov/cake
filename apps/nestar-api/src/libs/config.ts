@@ -7,10 +7,10 @@ export const availableOptions = ['propertyBarter', 'propertyRent'];
 export const availablePropertySorts = [
 	'createdAt',
 	'updatedAt',
-	'propertyLikes',
-	'propertyViews',
+	'productLikes',
+	'productViews',
 	'propertyRank',
-	'propertyPrice',
+	'productPrice',
 ];
 
 export const availableBoardArticleSorts = ['createdAt', 'updatedAt', 'articleLikes', 'articleViews']

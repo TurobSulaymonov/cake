@@ -1,7 +1,7 @@
 import { Field, InputType, Int } from "@nestjs/graphql";
 import { IsInt, IsNotEmpty, IsOptional, Length, Min, isAlpha } from "class-validator";
 import { ObjectId } from "mongoose";
-import { PropertyLocation, PropertyStatus, PropertyType } from "../../enums/property.enum";
+import { PropertyLocation, PropertyType, ProductStatus } from "../../enums/property.enum";
 
 
 @InputType()
@@ -15,8 +15,8 @@ export class PropertyUpdate{
     propertyType?: PropertyType;
 
     @IsOptional()
-    @Field(() => PropertyStatus, {nullable: true})
-    propertyStatus?: PropertyStatus;
+    @Field(() => ProductStatus, {nullable: true})
+    productStatus?: ProductStatus;
 
     @IsOptional()
     @Field(() => PropertyLocation, {nullable: true})
@@ -25,16 +25,16 @@ export class PropertyUpdate{
     @IsOptional()
     @Length(3, 100)
     @Field(() => String, {nullable: true})
-    propertyAddress?: string;
+    productAddress?: string;
   
     @IsOptional()
     @Length(3, 100)
     @Field(() => String, {nullable: true})
-    propertyTitle?: string;
+    productName?: string;
     
     @IsOptional()
     @Field(() => Number, {nullable: true})
-    propertyPrice?: number;
+    productPrice?: number;
 
     @IsOptional()
     @Field(() => Number, {nullable: true})
@@ -48,12 +48,12 @@ export class PropertyUpdate{
 
     @IsOptional()
     @Field(() => [String], {nullable: true})
-    propertyImages?: string[];
+    productImages?: string[];
 
     @IsOptional()
     @Length(5, 500)
     @Field(() => String, {nullable: true})
-    propertyDesc?: string;
+    productDesc?: string;
 
     @IsOptional()
     @Field(() => Boolean, {nullable: true})

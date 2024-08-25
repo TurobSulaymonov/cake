@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { PropertyLocation, PropertyStatus, PropertyType } from '../libs/enums/property.enum';
+import { PropertyLocation, PropertyType, ProductStatus } from '../libs/enums/property.enum';
 
 const PropertySchema = new Schema(
 	{
@@ -9,10 +9,10 @@ const PropertySchema = new Schema(
 			required: true,
 		},
 
-		propertyStatus: {
+		productStatus: {
 			type: String,
-			enum: PropertyStatus,
-			default: PropertyStatus.ACTIVE,
+			enum: ProductStatus,
+			default: ProductStatus.ACTIVE,
 		},
 
 		propertyLocation: {
@@ -21,70 +21,70 @@ const PropertySchema = new Schema(
 			required: true,
 		},
 
-		propertyAddress: {
+		productAddress: {
 			type: String,
 			required: true,
 		},
 
-		propertyTitle: {
+		productName: {
 			type: String,
 			required: true,
 		},
 
-		propertyPrice: {
+		productPrice: {
 			type: Number,
 			required: true,
 		},
-
+             /* alamshtirish kerak  */
 		propertySquare: {
 			type: Number,
 			required: true,
 		},
-
+          /* alamshtirish kerak  */
 		propertyBeds: {
 			type: Number,
 			required: true,
 		},
-
+ /* alamshtirish kerak  */
 		propertyRooms: {
 			type: Number,
 			required: true,
 		},
 
-		propertyViews: {
+		productViews: {
 			type: Number,
 			default: 0,
 		},
 
-		propertyLikes: {
+		productLikes: {
 			type: Number,
 			default: 0,
 		},
 
-		propertyComments: {
+		productComments: {
 			type: Number,
 			default: 0,
 		},
-
+         /*  */
 		propertyRank: {
 			type: Number,
 			default: 0,
 		},
 
-		propertyImages: {
+		productImages: {
 			type: [String],
 			required: true,
 		},
 
-		propertyDesc: {
+		productDesc: {
 			type: String,
 		},
-
+         /*  */
 		propertyBarter: {
 			type: Boolean,
 			default: false,
 		},
-
+          /*  */
 		propertyRent: {
 			type: Boolean,
 			default: false,
@@ -111,6 +111,6 @@ const PropertySchema = new Schema(
 	{ timestamps: true, collection: 'properties' },
 );
 
-PropertySchema.index({ propertyType: 1, propertyLocation: 1, propertyTitle: 1, propertyPrice: 1 }, { unique: true });
+PropertySchema.index({ propertyType: 1, propertyLocation: 1, productName: 1, productPrice: 1 }, { unique: true });
 
 export default PropertySchema;
