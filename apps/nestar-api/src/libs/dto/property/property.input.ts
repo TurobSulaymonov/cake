@@ -37,6 +37,11 @@ export class PropertyInput {
 	productPrice: number;
 
 	@IsNotEmpty()
+	@Length(3, 100)
+	@Field(() => String)
+	productIngredients: string;
+
+	@IsNotEmpty()
 	@Field(() => Number)
 	productWeight: number;
 

@@ -41,12 +41,17 @@ const PropertySchema = new Schema(
 			type: Number,
 			required: true,
 		},
-             /* alamshtirish kerak  */
+
+        productIngredients: {
+			type: String,
+			required: true,
+		},
+          
 		productWeight: {
 			type: Number,
 			required: true,
 		},
-          /* alamshtirish kerak  */
+         
 		productLeftCount: {
 			type: Number,
 			required: true,
@@ -67,7 +72,7 @@ const PropertySchema = new Schema(
 			type: Number,
 			default: 0,
 		},
-         /*  */
+    
 		propertyRank: {
 			type: Number,
 			default: 0,

@@ -33,6 +33,9 @@ export class Property{
 
     @Field(() => Number)
     productPrice: number;
+     
+    @Field(() => String)
+    productIngredients: string;
 
     @Field(() => Number)
     productWeight: number;

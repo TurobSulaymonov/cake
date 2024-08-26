@@ -41,6 +41,11 @@ export class PropertyUpdate{
     productPrice?: number;
 
     @IsOptional()
+    @Length(3, 100)
+    @Field(() => String, {nullable: true})
+    productIngredients?: string;
+
+    @IsOptional()
     @Field(() => Number, {nullable: true})
     productWeight?: number;
 
