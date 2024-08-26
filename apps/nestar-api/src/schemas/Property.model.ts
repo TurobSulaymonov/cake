@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { PropertyLocation, PropertyType, ProductStatus } from '../libs/enums/property.enum';
+import { PropertyLocation, PropertyType, ProductStatus, ProductSize } from '../libs/enums/property.enum';
 
 const PropertySchema = new Schema(
 	{
@@ -18,6 +18,12 @@ const PropertySchema = new Schema(
 		propertyLocation: {
 			type: String,
 			enum: PropertyLocation,
+			required: true,
+		},
+
+		productSize:{
+			type: String,
+			enum:ProductSize,
 			required: true,
 		},
 

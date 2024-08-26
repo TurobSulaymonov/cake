@@ -140,6 +140,7 @@ export class PropertyService {
         const {
 			memberId,
 			locationList,
+            sizeList,
 			roomsList,
 			bedsList,
 			typeList,
@@ -151,6 +152,8 @@ export class PropertyService {
 		} = input.search;
 		if (memberId) match.memberId = shapeIntoMongoObjectId(memberId);
 		if (locationList && locationList.length) match.propertyLocation = { $in: locationList };
+		if (sizeList && sizeList.length) match.sizeLocation = { $in: sizeList };
+
 		if (roomsList && roomsList.length) match.propertyRooms = { $in: roomsList };
 		if (bedsList && bedsList.length) match.propertyBeds = { $in: bedsList };
 		if (typeList && typeList.length) match.propertyType = { $in: typeList };
@@ -236,11 +239,13 @@ public async likeTargetProperty(memberId: ObjectId, likeRefId: ObjectId): Promis
     
 
    public async getAllPropertiesByAdmin(input: AllPropertiesInquiry): Promise<Properties> {
-    const { productStatus, propertyLocationList } = input.search;
+    const { productStatus, propertyLocationList, productSizeList } = input.search;
     const match: T = {};
     const sort: T = { [input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC};
         if (productStatus) match.productStatus = productStatus;
 		if (propertyLocationList) match.propertyLocation = { $in: propertyLocationList };
+		if (productSizeList) match.productSize = { $in: productSizeList };
+
      const result = await this.propertyModel
      .aggregate([
         {$match: match}, 

@@ -1,9 +1,9 @@
 import { registerEnumType } from '@nestjs/graphql';
 
 export enum PropertyType {
-	BIRTHDAY_CAKE = 'Birtday Cake',
-	ANNIVERSARY_CAKE = 'Anniversary Cake',
-	CELEBRATION_CAKE = 'Celebration Cake',
+	BirthdayCake = 'BirthdayCake',
+	AnniversaryCake = 'AnniversaryCake',
+	CelebrationCake = 'CelebrationCake',
 }
 registerEnumType(PropertyType, {
 	name: 'PropertyType',
@@ -16,6 +16,15 @@ export enum ProductStatus {
 }
 registerEnumType(ProductStatus, {
 	name: 'ProductStatus',
+});
+
+export enum ProductSize {
+	SMALL = "SMALL",
+	MEDIUM ="MEDIUM",
+	LARGE = 'LARGE'
+}
+registerEnumType(ProductSize, {
+	name: 'ProductSize',
 });
 
 export enum PropertyLocation {

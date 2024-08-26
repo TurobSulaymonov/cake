@@ -1,7 +1,7 @@
 import { Field, InputType, Int,  ObjectType } from "@nestjs/graphql";
 import { ObjectId } from "mongoose";
 import { isNotEmpty } from "class-validator";
-import { ProductStatus, PropertyLocation,  PropertyType } from "../../enums/property.enum";
+import { ProductSize, ProductStatus, PropertyLocation,  PropertyType } from "../../enums/property.enum";
 import { Member, TotalCounter } from "../member/member";
 import { MeLiked } from "../like/like";
 
@@ -21,6 +21,9 @@ export class Property{
     
     @Field(() => PropertyLocation)
     propertyLocation:PropertyLocation;
+
+    @Field(() => ProductSize)
+    productSize:ProductSize;
 
     @Field(() => String)
     productAddress: string;

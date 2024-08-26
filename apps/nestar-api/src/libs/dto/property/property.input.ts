@@ -1,6 +1,6 @@
 import { Field, InputType, Int } from "@nestjs/graphql";
 import { IsIn, IsInt, IsNotEmpty, IsOptional, Length, Min, isNotEmpty } from "class-validator";
-import { PropertyLocation, ProductStatus, PropertyType } from "../../enums/property.enum";
+import { PropertyLocation, ProductStatus, PropertyType, ProductSize } from "../../enums/property.enum";
 
 import { ObjectId } from "mongoose";
 import { availableOptions, availablePropertySorts } from "../../config";
@@ -16,6 +16,11 @@ export class PropertyInput {
 	@IsNotEmpty()
 	@Field(() => PropertyLocation)
 	propertyLocation: PropertyLocation;
+
+	
+	@IsNotEmpty()
+	@Field(() => ProductSize)
+	productSize: ProductSize;
 
 	@IsNotEmpty()
 	@Length(3, 100)
@@ -107,6 +112,10 @@ export class PISearch {
  @IsOptional()
  @Field(() => [PropertyLocation], { nullable: true })
  locationList?: PropertyLocation[];
+
+ @IsOptional()
+ @Field(() => [ProductSize], { nullable: true })
+ sizeList?: ProductSize[];
 
  @IsOptional()
  @Field(() => [PropertyType], { nullable: true })
@@ -210,6 +219,11 @@ class ALPISerach {
 	@IsOptional()
 	@Field(() => [PropertyLocation], { nullable: true })
 	propertyLocationList?: PropertyLocation[];
+
+	
+	@IsOptional()
+	@Field(() => [ProductSize], { nullable: true })
+	productSizeList?: ProductSize[];
 }
 
 @InputType()
