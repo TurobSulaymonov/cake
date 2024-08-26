@@ -40,8 +40,7 @@ export class Property{
     @Field(() => Int)
     productLeftCount: number;
 
-    @Field(() => Int)
-    propertyRooms: number;
+
 
     @Field(() => Int)
     productViews: number;

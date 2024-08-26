@@ -51,11 +51,7 @@ const PropertySchema = new Schema(
 			type: Number,
 			required: true,
 		},
- /* alamshtirish kerak  */
-		propertyRooms: {
-			type: Number,
-			required: true,
-		},
+
 
 		productViews: {
 			type: Number,

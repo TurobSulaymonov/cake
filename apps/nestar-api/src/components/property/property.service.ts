@@ -154,7 +154,7 @@ export class PropertyService {
 		if (locationList && locationList.length) match.propertyLocation = { $in: locationList };
 		if (sizeList && sizeList.length) match.sizeLocation = { $in: sizeList };
 
-		if (roomsList && roomsList.length) match.propertyRooms = { $in: roomsList };
+		
 		if (bedsList && bedsList.length) match.productLeftCount = { $in: bedsList };
 		if (typeList && typeList.length) match.propertyType = { $in: typeList };
 

@@ -46,11 +46,7 @@ export class PropertyInput {
 	@Field(() => Int)
 	productLeftCount: number;
 
-	@IsNotEmpty()
-	@IsInt()
-	@Min(1)
-	@Field(() => Int)
-	propertyRooms: number;
+
 
 	@IsNotEmpty()
 	@Field(() => [String])
