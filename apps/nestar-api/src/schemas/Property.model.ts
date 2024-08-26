@@ -42,12 +42,12 @@ const PropertySchema = new Schema(
 			required: true,
 		},
              /* alamshtirish kerak  */
-		propertySquare: {
+		productWeight: {
 			type: Number,
 			required: true,
 		},
           /* alamshtirish kerak  */
-		propertyBeds: {
+		productLeftCount: {
 			type: Number,
 			required: true,
 		},
@@ -86,12 +86,12 @@ const PropertySchema = new Schema(
 			type: String,
 		},
          /*  */
-		propertyBarter: {
+		productChocolate: {
 			type: Boolean,
 			default: false,
 		},
           /*  */
-		propertyRent: {
+		fruitCake: {
 			type: Boolean,
 			default: false,
 		},

@@ -38,13 +38,13 @@ export class PropertyInput {
 
 	@IsNotEmpty()
 	@Field(() => Number)
-	propertySquare: number;
+	productWeight: number;
 
 	@IsNotEmpty()
 	@IsInt()
 	@Min(1)
 	@Field(() => Int)
-	propertyBeds: number;
+	productLeftCount: number;
 
 	@IsNotEmpty()
 	@IsInt()
@@ -63,11 +63,11 @@ export class PropertyInput {
 
 	@IsOptional()
 	@Field(() => Boolean, { nullable: true })
-	propertyBarter?: boolean;
+	productChocolate?: boolean;
 
 	@IsOptional()
 	@Field(() => Boolean, { nullable: true })
-	propertyRent?: boolean;
+	fruitCake?: boolean;
 
 	memberId?: ObjectId;
 

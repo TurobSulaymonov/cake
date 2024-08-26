@@ -35,10 +35,10 @@ export class Property{
     productPrice: number;
 
     @Field(() => Number)
-    propertySquare: number;
+    productWeight: number;
 
     @Field(() => Int)
-    propertyBeds: number;
+    productLeftCount: number;
 
     @Field(() => Int)
     propertyRooms: number;
@@ -62,10 +62,10 @@ export class Property{
     productDesc?: string;
 
     @Field(() => Boolean)
-    propertyBarter: boolean;
+    productChocolate: boolean;
 
     @Field(() => Boolean)
-    propertyRent: boolean;
+    fruitCake: boolean;
    
 
     @Field(() => String)

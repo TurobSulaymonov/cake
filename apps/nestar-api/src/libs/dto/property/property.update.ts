@@ -42,13 +42,13 @@ export class PropertyUpdate{
 
     @IsOptional()
     @Field(() => Number, {nullable: true})
-    propertySquare?: number;
+    productWeight?: number;
 
     @IsOptional()
     @IsInt()
     @Min(1)
     @Field(() => Int, {nullable: true})
-    propertyBeds?: number;
+    productLeftCount?: number;
 
     @IsOptional()
     @Field(() => [String], {nullable: true})
@@ -61,11 +61,11 @@ export class PropertyUpdate{
 
     @IsOptional()
     @Field(() => Boolean, {nullable: true})
-    propertyBarter?: boolean;
+    productChocolate?: boolean;
 
     @IsOptional()
     @Field(() => Boolean, {nullable: true})
-    propertyRent?: boolean;
+    fruitCake?: boolean;
 
     soldAt?: Date;
 

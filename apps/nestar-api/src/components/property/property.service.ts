@@ -155,12 +155,12 @@ export class PropertyService {
 		if (sizeList && sizeList.length) match.sizeLocation = { $in: sizeList };
 
 		if (roomsList && roomsList.length) match.propertyRooms = { $in: roomsList };
-		if (bedsList && bedsList.length) match.propertyBeds = { $in: bedsList };
+		if (bedsList && bedsList.length) match.productLeftCount = { $in: bedsList };
 		if (typeList && typeList.length) match.propertyType = { $in: typeList };
 
 		if (pricesRange) match.productPrice = { $gte: pricesRange.start, $lte: pricesRange.end };
 		if (periodsRange) match.createdAt = { $gte: periodsRange.start, $lte: periodsRange.end };
-		if (squaresRange) match.propertySquare = { $gte: squaresRange.start, $lte: squaresRange.end };
+		if (squaresRange) match.productWeight = { $gte: squaresRange.start, $lte: squaresRange.end };
 
         
         if(text) match.productName = {$regex: new RegExp(text, 'i') };
