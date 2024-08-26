@@ -26,12 +26,7 @@ const PropertySchema = new Schema(
 			enum:ProductSize,
 			required: true,
 		},
-
-		productAddress: {
-			type: String,
-			required: true,
-		},
-
+     
 		productName: {
 			type: String,
 			required: true,

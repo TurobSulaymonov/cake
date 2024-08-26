@@ -22,10 +22,7 @@ export class PropertyInput {
 	@Field(() => ProductSize)
 	productSize: ProductSize;
 
-	@IsNotEmpty()
-	@Length(3, 100)
-	@Field(() => String)
-	productAddress: string;
+
 
 	@IsNotEmpty()
 	@Length(3, 100)

@@ -25,8 +25,7 @@ export class Property{
     @Field(() => ProductSize)
     productSize:ProductSize;
 
-    @Field(() => String)
-    productAddress: string;
+   
 
     @Field(() => String)
     productName: string;

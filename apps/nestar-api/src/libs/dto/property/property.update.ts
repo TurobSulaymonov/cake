@@ -26,10 +26,7 @@ export class PropertyUpdate{
     @Field(() => ProductSize, {nullable: true})
     productSize: ProductSize;
 
-    @IsOptional()
-    @Length(3, 100)
-    @Field(() => String, {nullable: true})
-    productAddress?: string;
+ 
   
     @IsOptional()
     @Length(3, 100)
