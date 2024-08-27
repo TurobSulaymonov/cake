@@ -75,7 +75,17 @@ export class PropertyService {
         return targetProperty;
     }
 
+    public async getLastSoldProperty(): Promise<Property> {
+		const lastSoldProperty = await this.propertyModel
+			.findOne({ producStatus: ProductStatus.SOLD })
+			.sort({ updatedAt: -1 })
+			.exec();
 
+		if (!lastSoldProperty) {
+			throw new InternalServerErrorException('No sold properties found.');
+		}
+		return lastSoldProperty;
+	}
 
     public async updateProperty(memberId: ObjectId, input: PropertyUpdate): Promise<Property> {
         let {productStatus, soldAt, deletedAt } = input;

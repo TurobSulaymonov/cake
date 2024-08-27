@@ -8,6 +8,7 @@ import { CommentResolver } from './comment.resolver';
 import { CommentService } from './comment.service';
 import { PropertyModule } from "../property/property.module";
 import { BoardArticleModule } from "../board-article/board-article.module";
+import { NotificationModule } from "../notification/notification.module";
 
 
 
@@ -22,7 +23,8 @@ import { BoardArticleModule } from "../board-article/board-article.module";
            AuthModule,
            MemberModule,
            PropertyModule,
-           BoardArticleModule
+           BoardArticleModule,
+           NotificationModule,
           ],
    
   providers: [CommentResolver, CommentService],

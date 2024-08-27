@@ -109,7 +109,14 @@ export class PropertyResolver {
         const likeRefId = shapeIntoMongoObjectId(input);
         return await this.propertyService.likeTargetProperty(memberId, likeRefId )
     } 
+  
 
+    @UseGuards(WithoutGuard)
+	@Query(() => Property)
+	public async getLastSoldProperty(): Promise<Property> {
+		console.log('Query: getLastSoldProperty');
+		return await this.propertyService.getLastSoldProperty();
+	}
  /** ADMIN **/
  
  @Roles(MemberType.ADMIN)

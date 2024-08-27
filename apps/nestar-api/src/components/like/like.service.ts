@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
 import { Like, MeLiked } from '../../libs/dto/like/like';
@@ -10,31 +10,59 @@ import { Properties } from '../../libs/dto/property/property';
 import { OrdinaryInquiry } from '../../libs/dto/property/property.input';
 import { LikeGroup } from '../../libs/enums/like.enum';
 import { lookupFavorite } from '../../libs/config';
+import { MemberService } from '../member/member.service';
+import { NotificationService } from '../notification/notification.service';
+import { NotificationGroup } from '../../libs/enums/notification.enum';
 
 @Injectable()
 export class LikeService {
-  constructor(@InjectModel('Like') private readonly likeModel: Model<Like>){}
-  
-  public async toggleLike(input: LikeInput): Promise<number>{
-    console.log("EXECUTED")
-    const search: T = { memberId: input.memberId, likeRefId: input.likeRefId },
-      exist = await this.likeModel.findOne(search).exec();
-    let modifier = 1;
+  constructor(
+    @InjectModel('Like') private readonly likeModel: Model<Like>,
+    @Inject(forwardRef(() => MemberService)) private readonly memberService: MemberService,
+		private readonly notificationService: NotificationService,
 
-    if(exist) {
-      await this.likeModel.findOneAndDelete(search).exec();
-      modifier = -1;
-     } else {
-      try{
-        await this.likeModel.create(input);
-      } catch (err){
-        console.log("ERROR, Service.model");
-        throw new BadRequestException(Message.CREATE_FAILED);
-      }
-     }
-     console.log(`~ Like modifier ${modifier} ~`);
-    return modifier;
-  }
+  ){}
+  
+  public async toggleLike(input: LikeInput): Promise<number> {
+		const { likeGroup, likeRefId, memberId } = input;
+		const search: T = {
+				memberId: input.memberId,
+				likeRefId: input.likeRefId,
+			},
+			exist = await this.likeModel.findOne(search).exec();
+
+		let modifier = 1;
+
+		if (exist) {
+			await this.likeModel.findOneAndDelete(search).exec();
+			modifier = -1;
+			await this.notificationService.createNotificationForUnlike(likeGroup, likeRefId, memberId);
+		} else {
+			try {
+				await this.likeModel.create(input);
+				await this.notificationService.createNotificationForLike(likeGroup, likeRefId, memberId);
+			} catch (err) {
+				console.log('Error, Service.model', err.message);
+				throw new BadRequestException(Message.CREATE_FAILED);
+			}
+		}
+		console.log(` - like modifier ${modifier} - `);
+
+		return modifier;
+	}
+
+  private getNotificationGroup(likeGroup: LikeGroup): NotificationGroup {
+		switch (likeGroup) {
+			case LikeGroup.MEMBER:
+				return NotificationGroup.MEMBER;
+			case LikeGroup.ARTICLE:
+				return NotificationGroup.ARTICLE;
+			case LikeGroup.PROPERTY:
+				return NotificationGroup.PROPERTY;
+			default:
+				throw new BadRequestException('Invalid like group');
+		}
+	}
 
   public async checkLikeExistence (input: LikeInput): Promise<MeLiked[]>{
     const {memberId, likeRefId} = input; 

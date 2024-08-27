@@ -11,6 +11,7 @@ import { CommentGroup, CommentStatus } from '../../libs/enums/comment.enum';
 import { Comment, Comments } from '../../libs/dto/comment/comment';
 import { CommentUpdate } from '../../libs/dto/comment/comment.update';
 import { lookupMember } from '../../libs/config';
+import { NotificationService } from '../notification/notification.service';
 
 @Injectable()
 export class CommentService {
@@ -18,6 +19,7 @@ export class CommentService {
     private readonly memberService: MemberService,
     private readonly propertyService: PropertyService,
     private readonly boardArticleServise: BoardArticleService,
+    private readonly notificationService: NotificationService,
  ) {}
 
  public async createComment (memberId: ObjectId, input: CommentInput): Promise<Comment>{
@@ -57,6 +59,12 @@ export class CommentService {
         }
 
         if(!result) throw new InternalServerErrorException(Message.CREATE_FAILED);
+        await this.notificationService.createNotificationForComment(
+			input.commentGroup,
+			input.commentRefId,
+			memberId,
+			input.commentContent,
+		);
 
         return result;
   

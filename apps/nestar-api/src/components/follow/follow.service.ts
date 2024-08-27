@@ -7,24 +7,26 @@ import { Direction, Message } from '../../libs/enums/common.enum';
 import { FollowInquiry } from '../../libs/dto/follow/follow.input';
 import { T } from '../../libs/types/common';
 import { lookupAuthMemberFollowed, lookupAuthMemberLiked, lookupFollowerData, lookupFollowingData, lookupMember } from '../../libs/config';
+import { NotificationService } from '../notification/notification.service';
 
 @Injectable()
 export class FollowService {
     constructor(@InjectModel('Follow') private readonly followModel: Model<Follower | Following>, 
     private memberService: MemberService,
+    private notificationService: NotificationService,
 ){}
 
-public async subscribe(followerid: ObjectId, followingId: ObjectId): Promise<Follower>{
-     if(followerid.toString() === followingId.toString()){
+public async subscribe(followerId: ObjectId, followingId: ObjectId): Promise<Follower>{
+     if(followerId.toString() === followingId.toString()){
         throw new InternalServerErrorException(Message.SELF_SUBSCRIPTION_DENIED);
      } 
 
      const targetMember = await this.memberService.getMember(null, followingId);
     if (!targetMember) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
      
-     const result = await this.registerSubscription(followerid, followingId);
-
-     await this.memberService.memberStatsEditor({_id: followerid, targetKey: "memberFollowings", modifier: 1});
+     const result = await this.registerSubscription(followerId, followingId);
+     await this.notificationService.createNotificationForFollow(followerId, followingId);
+     await this.memberService.memberStatsEditor({_id: followerId, targetKey: "memberFollowings", modifier: 1});
      await this.memberService.memberStatsEditor({_id: followingId, targetKey: "memberFollowers", modifier: 1});
 
     return result;
@@ -57,6 +59,7 @@ public async unsubscribe(followerId: ObjectId, followingId: ObjectId): Promise<F
 
     await this.memberService.memberStatsEditor({_id: followerId, targetKey: "memberFollowings", modifier: -1});
     await this.memberService.memberStatsEditor({_id: followerId, targetKey: "memberFollowers", modifier: -1});
+    await this.notificationService.createNotificationForUnfollow(followerId, followingId);
 
    return result;
 }
