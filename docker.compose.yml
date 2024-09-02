@@ -16,7 +16,7 @@ services:
     # for production
     command: bash -c "rm -rf dist && npm install && npm run build && npm run start:prod"
 
-  quarter-batch:
+  nestar-batch:
     container_name: nestar-batch
     restart: unless-stopped
     image: node:20.10.0
