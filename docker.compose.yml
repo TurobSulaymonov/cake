@@ -7,8 +7,8 @@ services:
     ports:
       - 4001:3007
     volumes:
-      - ./:/usr/src/nestar
-    working_dir: /usr/src/nestar
+      - ./:/usr/src/myProject
+    working_dir: /usr/src/myProject
 
     networks:
       - monorepo-network
@@ -23,8 +23,8 @@ services:
     ports:
       - 4002:3008
     volumes:
-      - ./:/usr/src/nestar
-    working_dir: /usr/src/nestar
+      - ./:/usr/src/myProject
+    working_dir: /usr/src/myProject
 
     networks:
       - monorepo-network
